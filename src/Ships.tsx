@@ -11,19 +11,19 @@ type ShipsProps = {
   onLoadMore: () => void;
 };
 function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
+  const handleScroll = () => {
+    const height1 = window.innerHeight + document.documentElement.scrollTop;
+    const height2 = document.documentElement.offsetHeight;
+    const errorMargin = 10;
+    const areHeightEqual =
+      Math.abs(height1 - height2) <= errorMargin &&
+      Math.abs(height2 - height1) <= errorMargin;
+    if (!areHeightEqual || loading || isLimitReached) {
+      return;
+    }
+    onLoadMore();
+  };
   useEffect(() => {
-    const handleScroll = () => {
-      const height1 = window.innerHeight + document.documentElement.scrollTop;
-      const height2 = document.documentElement.offsetHeight;
-      const errorMargin = 10;
-      const areHeightEqual =
-        Math.abs(height1 - height2) <= errorMargin &&
-        Math.abs(height2 - height1) <= errorMargin;
-      if (!areHeightEqual || loading || isLimitReached) {
-        return;
-      }
-      onLoadMore();
-    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, isLimitReached, onLoadMore]);
