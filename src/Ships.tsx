@@ -30,6 +30,7 @@ function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
 
   return (
     <div className={styles.container}>
+      <h3>Ships</h3>
       <ul className={styles.listContainer}>
         {entries.map((ship, index) => (
           <div key={index}>
