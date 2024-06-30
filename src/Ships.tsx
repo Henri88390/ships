@@ -12,6 +12,7 @@ type ShipsProps = {
 };
 function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
   const handleScroll = () => {
+    console.log("hello");
     const height1 = window.innerHeight + document.documentElement.scrollTop;
     const height2 = document.documentElement.offsetHeight;
     const errorMargin = 10;
