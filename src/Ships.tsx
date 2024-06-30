@@ -11,23 +11,22 @@ type ShipsProps = {
   onLoadMore: () => void;
 };
 function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
-  const handleScroll = () => {
-    const height1 = window.innerHeight + document.documentElement.scrollTop;
-    const height2 = document.documentElement.offsetHeight;
-    const errorMargin = 10;
-    const areHeightEqual =
-      Math.abs(height1 - height2) <= errorMargin &&
-      Math.abs(height2 - height1) <= errorMargin;
-    if (!areHeightEqual || loading || isLimitReached) {
-      return;
-    }
-    onLoadMore();
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      const height1 = window.innerHeight + document.documentElement.scrollTop;
+      const height2 = document.documentElement.offsetHeight;
+      const errorMargin = 10;
+      const areHeightEqual =
+        Math.abs(height1 - height2) <= errorMargin &&
+        Math.abs(height2 - height1) <= errorMargin;
+      if (!areHeightEqual || loading || isLimitReached) {
+        return;
+      }
+      onLoadMore();
+    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [loading]);
+  }, [loading, isLimitReached, onLoadMore]);
 
   return (
     <div className={styles.container}>
@@ -35,7 +34,11 @@ function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
         {entries.map((ship, index) => (
           <div key={index}>
             <li key={index}>{ship.name}</li>
-            <img width={500} src={ship.image || undefined} />
+            <img
+              width={500}
+              alt={ship.name || ""}
+              src={ship.image || undefined}
+            />
           </div>
         ))}
       </ul>
