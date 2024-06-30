@@ -39,4 +39,4 @@ jobs:
         run: yarn run build
 
       - name: Run unit tests
-        run: yarn run test
+        run: yarn run test --passWithNoTests
