@@ -13,7 +13,7 @@ type ShipsProps = {
 function Ships({ entries, loading, onLoadMore, isLimitReached }: ShipsProps) {
   useEffect(() => {
     const handleScroll = () => {
-      console.log("hello world");
+      console.log("hello world 2");
       const height1 = window.innerHeight + document.documentElement.scrollTop;
       const height2 = document.documentElement.offsetHeight;
       const errorMargin = 10;
